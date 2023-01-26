@@ -1,0 +1,95 @@
+package com.omerfaruk.cokluaktivite;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+
+public class MainActivity extends AppCompatActivity {
+
+    String username;
+    EditText editText;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        editText = findViewById(R.id.editText);
+
+    }
+
+    public void changeActivity(View view){
+
+        username = editText.getText().toString();    //kullanıcıdan ismini alıyoruz.
+
+        Intent intent = new Intent(MainActivity.this,MainActivity2.class);      // "Intent" yardımı ile butona tıkladığımızda 2.ekrana geçebiliyoruz -- ((context - hangi class a?))
+        intent.putExtra("user input",username);      // bu şekilde intent kullanarak "user input" anahtar kelimesi yardımı ile veriyi 2.ekrana yollayabiliyoruz.
+
+        startActivity(intent);
+
+    }
+
+}
+
+
+/*
+    uygulamalarımızın %99 u birden çok ekran(aktivite) lı olucak!!!
+
+    diyelimki sosyal medya uygulamas yapıyoruz.
+    ilk ekranda kullanıcı sıfresı ve kulllanıcı adıyla kayıt olucak. (sonra başka bir ekrana aktiviteye yollamam lazım)
+    ardından resimlerin ve videoların döndüğü asıl ekran olan ikinci ekrana geçmesi lazım.
+
+    şuan kodlar için bir tane "MAİN" ve tasarım için bir tane "MAİN" aktivitemiz(ekran) var.
+    2.ekranlar için java altında - mainactivity altında - new - activity...
+
+    1.aktivitemde (ekran) kullanıcının ismini öğrendim. bu inputu (isim) 2.aktivitemde (ekran) kullanabilir miyim?
+    evet kullanabiliriz.
+
+    1.ekranda kullanıcıdam ismini alalım ve 2. ekranda bunu ekrana yazdıralım.  EditText ve TextView tanımlayalım /*
+    
+    
+    
+    ---------------------------------------------------------------------------------------------------------------------------------------------------------
+    
+    
+    
+    package com.omerfaruk.cokluaktivite;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
+
+public class MainActivity2 extends AppCompatActivity {
+
+    TextView textView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main2);
+        textView = findViewById(R.id.textView3);
+
+        Intent intent = getIntent();
+        String userName2 = intent.getStringExtra("user input");   // "user input" anahtar kelimesi ile "username" yi buraya alıp userName değişkenine atıyoruz.
+        textView.setText(userName2);    // 1.ekrandan aldgımız ve username2 ye atadığımız isimi burada yazdırıyoruz.
+
+    }
+
+    public void changeActivity2(View view){
+
+        Intent intent = new Intent(MainActivity2.this,MainActivity.class);      // "Intent" yardımı ile butona tıkladığımızda 1.ekrana geçebiliyoruz.
+        startActivity(intent);                                                              // ((context - hangi class a?))
+
+    }
+
+}
+    
+    
+    
+    
